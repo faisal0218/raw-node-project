@@ -8,9 +8,9 @@ app.config = {
     port: 3000,
 };
 
-data.update('test', 'newFile', { name: 'England', lang: 'English' }, (err) => {
-    console.log(err);
-});
+// data.delete('test', 'newFile', (err) => {
+//     console.log(err);
+// });
 
 app.createServer = () => {
     const server = http.createServer(app.handleReqRes);
