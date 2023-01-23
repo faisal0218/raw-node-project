@@ -8,6 +8,10 @@ app.config = {
     port: 3000,
 };
 
+data.read('test', 'newFile', (err, data) => {
+    console.log(err, data);
+});
+
 app.createServer = () => {
     const server = http.createServer(app.handleReqRes);
     server.listen(app.config.port, () => {
