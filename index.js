@@ -1,5 +1,6 @@
 const http = require('http');
 const { handleReqRes } = require('./helpers/handleReqRes');
+const data = require('./lib/data');
 
 const app = {};
 
@@ -10,6 +11,7 @@ app.config = {
 app.createServer = () => {
     const server = http.createServer(app.handleReqRes);
     server.listen(app.config.port, () => {
+        console.log(`application running mode: ${process.env.NODE_ENV}`);
         console.log(`listening to port ${app.config.port}`);
     });
 };
