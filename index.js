@@ -8,8 +8,8 @@ app.config = {
     port: 3000,
 };
 
-data.read('test', 'newFile', (err, data) => {
-    console.log(err, data);
+data.update('test', 'newFile', { name: 'England', lang: 'English' }, (err) => {
+    console.log(err);
 });
 
 app.createServer = () => {
