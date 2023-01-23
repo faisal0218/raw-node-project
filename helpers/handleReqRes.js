@@ -10,7 +10,10 @@
 const url = require('url');
 const { StringDecoder } = require('string_decoder');
 const routes = require('../routes');
-const { notFoundHandler } = require('../handlers/routeHandlers/notFoundHandler');
+const {
+    notFoundHandler,
+} = require('../handlers/routeHandlers/notFoundHandler');
+const { parseJSON } = require('./utilities');
 
 // modue scaffolding
 const handler = {};
@@ -37,7 +40,9 @@ handler.handleReqRes = (req, res) => {
     const decoder = new StringDecoder('utf-8');
     let realData = '';
 
-    const chosenHandler = routes[trimmedPath] ? routes[trimmedPath] : notFoundHandler;
+    const chosenHandler = routes[trimmedPath]
+        ? routes[trimmedPath]
+        : notFoundHandler;
 
     req.on('data', (buffer) => {
         realData += decoder.write(buffer);
@@ -45,6 +50,8 @@ handler.handleReqRes = (req, res) => {
 
     req.on('end', () => {
         realData += decoder.end();
+
+        requestProperties.body = parseJSON(realData);
 
         chosenHandler(requestProperties, (statusCode, payload) => {
             statusCode = typeof statusCode === 'number' ? statusCode : 500;
