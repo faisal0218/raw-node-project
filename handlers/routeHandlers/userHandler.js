@@ -147,7 +147,7 @@ handler._users.put = (requestProperties, callback) => {
                         userData.firstName = firstName;
                     }
                     if (lastName) {
-                        userData.lastName = lastName;
+                        userData.firstName = firstName;
                     }
                     if (password) {
                         userData.password = hash(password);
